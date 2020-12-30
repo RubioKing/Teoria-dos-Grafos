@@ -94,7 +94,7 @@ void No::insereAresta(int id_alvo, float peso){
     if(this->primeira_aresta != nullptr){
         // Allocating the new edge and keeping the integrity of the edge list
         Aresta* aresta = new Aresta(id_alvo);
-        edge->setPeso(peso);
+        aresta->setPeso(peso);
         this->ultima_aresta->setProxAresta(aresta);
         this->ultima_aresta = aresta;
 
@@ -138,7 +138,7 @@ int No::removeAresta(int id, bool direcionada, No* no_alvo){
         // Searching for the edge to be removed
         while(aux->getIdAlvo() != id){
 
-            previous = aux;
+            anterior = aux;
             aux = aux->getProxAresta();
 
         }
@@ -157,13 +157,13 @@ int No::removeAresta(int id, bool direcionada, No* no_alvo){
 
         delete aux;
         // Verifies whether the graph is directed
-        if(directed)
+        if(direcionada)
             this->diminuiGrauSaida();
 
         else{
 
             this->diminuiGrauSaida();
-            target_No->diminuiGrauSaida();
+            no_alvo->diminuiGrauSaida();
 
         }
 

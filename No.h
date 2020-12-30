@@ -15,7 +15,7 @@ class No{
         unsigned int grau_entrada;
         unsigned int grau_saida;
         float peso;
-        No* next_node;
+        No* prox_no;
 
     public:
         // Constructor

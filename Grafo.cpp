@@ -17,7 +17,6 @@ using namespace std;
 // Constructor
 Grafo::Grafo(int ordem, bool direcionado, bool aresta_ponderada, bool no_ponderado)
 {
-
     this->ordem = ordem;
     this->direcionado = direcionado;
     this->aresta_ponderada = aresta_ponderada;
@@ -25,6 +24,12 @@ Grafo::Grafo(int ordem, bool direcionado, bool aresta_ponderada, bool no_pondera
     this->primeiro_no = this->ultimo_no = nullptr;
     this->numero_arestas = 0;
 }
+
+Grafo::Grafo()
+{
+    
+}
+
 
 // Destructor
 Grafo::~Grafo()

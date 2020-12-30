@@ -22,6 +22,7 @@ class Grafo{
     public:
         //Constructor
         Grafo(int ordem, bool direcionado, bool aresta_ponderada, bool no_ponderado);
+        Grafo();
         //Destructor
         ~Grafo();
         //Getters
