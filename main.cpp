@@ -15,8 +15,6 @@ int menu()
 {
     int selecao;
     cout << "----------------------------------" << endl;
-    cout << "   Subconjunto dominante minimo" << endl;
-    cout << "----------------------------------" << endl;
     cout << "               MENU" << endl;
     cout << "----------------------------------" << endl;
     cout << " Opcao | Descricao" << endl;

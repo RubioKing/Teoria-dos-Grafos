@@ -27,9 +27,7 @@ Grafo::Grafo(int ordem, bool direcionado, bool aresta_ponderada, bool no_pondera
 
 Grafo::Grafo()
 {
-    
 }
-
 
 // Destructor
 Grafo::~Grafo()
@@ -53,6 +51,7 @@ int Grafo::getOrdem()
 
     return this->ordem;
 }
+
 int Grafo::getNumeroArestas()
 {
 
@@ -96,71 +95,134 @@ No *Grafo::getUltimoNo()
 */
 void Grafo::insereNo(int id)
 {
-    
+    if (this->getNo(id) != nullptr)
+    {
+        return;
+    }
+
+    int quant = this->getOrdem();
+    No *p = new No(id);
+
+    if (ultimo_no == nullptr)
+    {
+        ultimo_no = p;
+        primeiro_no = p;
+    }
+    else
+    {
+        this->ultimo_no->setProxNo(p);
+        this->ultimo_no = p;
+    }
 }
 
 void Grafo::insereAresta(int id, int id_alvo, float peso)
 {
+    if (!this->BuscaNo(id))
+    {
+        this->BuscaNo(id);
+    }
 
-    
+    if (!this->BuscaNo(id_alvo))
+    {
+        this->insereNo(id_alvo);
+    }
+
+    No *saida = this->getNo(id);
+    saida->insereAresta(id_alvo, peso);
+    No *entrada = this->getNo(id_alvo);
+    entrada->insereAresta(id, peso);
+    saida->somaGrauSaida();
+    entrada->somaGrauEntrada();
+
+    numero_arestas++;
 }
 
-void Grafo::removeNo(int id){ 
-    
+void Grafo::removeNo(int id)
+{
+    No *p = this->getNo(id);
+
+    if (p == nullptr)
+    {
+        return;
+    }
+
+    No *q = this->primeiro_no;
+
+    if (p == primeiro_no)
+    {
+        primeiro_no = p->getProxNo();
+        delete p;
+        return;
+    }
+
+    for (; q->getProxNo() != p; q = q->getProxNo())
+        ;
+
+    if (p->getProxNo() == nullptr)
+    {
+        this->ultimo_no = q;
+    }
+    else
+    {
+        q->setProxNo(p->getProxNo());
+    }
+    delete p;
 }
 
 bool Grafo::BuscaNo(int id)
 {
-    
+    No *p = this->primeiro_no;
+    for (; p != nullptr;)
+    {
+        if (p->getId() == id)
+            return true;
+        p = p->getProxNo();
+    }
+    return false;
 }
 
 No *Grafo::getNo(int id)
 {
-
-    
+    No *p = this->primeiro_no;
+    for (; p != nullptr;)
+    {
+        if (p->getId() == id)
+            return p;
+        p = p->getProxNo();
+    }
+    return nullptr;
 }
-
 
 //Function that verifies if there is a path between two nodes
-bool Grafo::depthFirstSearch(int initialId, int targetId){
-    
+bool Grafo::depthFirstSearch(int initialId, int targetId)
+{
 }
 
-
-void Grafo::breadthFirstSearch(ofstream &output_file){
-    
+void Grafo::breadthFirstSearch(ofstream &output_file)
+{
 }
 
-
-Grafo *Grafo::getComplement(){
-    
+Grafo *Grafo::getComplement()
+{
 }
-
-    
 
 //A function that returns a subjacent of a direcionado graph, which is a graph which the arcs have opposite directions to the original graph
-Grafo* Grafo::getSubjacent(){
-    
+Grafo *Grafo::getSubjacent()
+{
 }
 
-bool Grafo::connectedGraph(){
-    
+bool Grafo::connectedGraph()
+{
 }
 
-
-
-bool Grafo::hasCircuit(){
-    
+bool Grafo::hasCircuit()
+{
 }
 
-
-
-float** Grafo::floydMarshall(){
-    
+float **Grafo::floydMarshall()
+{
 }
 
-   
-
-float* Grafo::dijkstra(int id){
-    
+float *Grafo::dijkstra(int id)
+{
 }
